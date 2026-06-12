@@ -1,15 +1,15 @@
 // passagiers data
 
 let passagiers = [
-  { id: 163821, naam: "Leo Daams", saldo: 34, woonplaats: "Den Bosch", foto: "https://img.freepik.com/vrije-photo/pretty-glimlachend-vreugdevolle-vrouw-met-blond-haar-terloops-gekleed-op-zoek-naar-tevredenheid_176420-15187.jpg" },
-  { id: 145032, naam: "Nicole Hops", saldo: 18, woonplaats: "Maastricht" },
-  { id: 139523, naam: "Jacobs Boom", saldo: 53, woonplaats: "Roermond" },
-  { id: 120584, naam: "Naomi Groentenboer", saldo: 31, woonplaats: "Herkenbosch" },
-  { id: 178294, naam: "Sanne Verbeek", saldo: 42, woonplaats: "Eindhoven" },
-  { id: 156783, naam: "Tom Peters", saldo: 27, woonplaats: "Utrecht" },
-  { id: 189405, naam: "Lisa van Dijk", saldo: 65, woonplaats: "Amsterdam" },
-  { id: 167320, naam: "Kees Brouwer", saldo: 12, woonplaats: "Tilburg" },
-  { id: 194876, naam: "Anouk Smit", saldo: 38, woonplaats: "Nijmegen" },
+  { id: 163821, naam: "Leo Daams", saldo: 34, woonplaats: "Den Bosch", foto: "https://static.vecteezy.com/system/resources/previews/063/477/498/non_2x/illustration-of-generic-male-avatar-in-gray-tones-for-anonymous-profile-placeholder-with-neutral-expression-designed-for-use-in-online-platforms-and-social-media-vector.jpg" },
+  { id: 145032, naam: "Nicole Hops", saldo: 18, woonplaats: "Maastricht", foto: "https://i.pinimg.com/736x/1b/2e/31/1b2e314e767a957a44ed8f992c6d9098.jpg"},
+  { id: 139523, naam: "Jacobs Boom", saldo: 53, woonplaats: "Roermond", foto: "https://i.pinimg.com/736x/1b/2e/31/1b2e314e767a957a44ed8f992c6d9098.jpg"}, 
+  { id: 120584, naam: "Naomi Groentenboer", saldo: 31, woonplaats: "Herkenbosch", foto: "https://i.pinimg.com/736x/1b/2e/31/1b2e314e767a957a44ed8f992c6d9098.jpg"}, 
+  { id: 178294, naam: "Sanne Verbeek", saldo: 42, woonplaats: "Eindhoven", foto: "https://i.pinimg.com/736x/1b/2e/31/1b2e314e767a957a44ed8f992c6d9098.jpg"}, 
+  { id: 156783, naam: "Tom Peters", saldo: 27, woonplaats: "Utrecht", foto: "https://static.vecteezy.com/system/resources/previews/063/477/498/non_2x/illustration-of-generic-male-avatar-in-gray-tones-for-anonymous-profile-placeholder-with-neutral-expression-designed-for-use-in-online-platforms-and-social-media-vector.jpg" },
+  { id: 189405, naam: "Lisa van Dijk", saldo: 65, woonplaats: "Amsterdam", foto: "https://i.pinimg.com/736x/1b/2e/31/1b2e314e767a957a44ed8f992c6d9098.jpg"},
+  { id: 167320, naam: "Kees Brouwer", saldo: 12, woonplaats: "Tilburg", foto: "https://static.vecteezy.com/system/resources/previews/063/477/498/non_2x/illustration-of-generic-male-avatar-in-gray-tones-for-anonymous-profile-placeholder-with-neutral-expression-designed-for-use-in-online-platforms-and-social-media-vector.jpg" },
+  { id: 194876, naam: "Anouk Smit", saldo: 38, woonplaats: "Nijmegen", foto: "https://i.pinimg.com/736x/1b/2e/31/1b2e314e767a957a44ed8f992c6d9098.jpg"},
 
 ];
 
@@ -58,7 +58,6 @@ function mutatieSaldo(id, bedrag) {
     if (reiziger) {
         reiziger.saldo += bedrag;
         checkSound.play().catch(() => {
-            console.log("Geluid geblokkeerd: klik eerst ergens op de pagina.");
         });
         toonPassagiers();
     }
@@ -69,15 +68,6 @@ function verwijderPassagier(id) {
     toonPassagiers();
 }
 
-
-    // Kans op nieuwe passagiers die instappen
-    if (Math.random() > 0.5) {
-        const nieuwId = Math.floor(Math.random() * 999999);
-        const namen = ["Timur", "Jarno", "Milan", "Mustafa", "Dillan"];
-        const naam = namen[Math.floor(Math.random() * namen.length)];
-        voegPassagierToe(nieuwId, naam, 20, "Onbekend");
-    }
-
 function updateBusLocatie() {
     // Reset alle haltes visueel
     for (let i = 0; i < totaalHaltes; i++) {
@@ -87,22 +77,13 @@ function updateBusLocatie() {
             halteElement.innerText = halteElement.innerText.replace(' (Huidig)', '');
         }
     }
-
-    // Zet de bus op de nieuwe halte
-    const actueleHalte = document.getElementById(`halte-${huidigeHalteIndex}`);
-    if (actueleHalte) {
-        actueleHalte.classList.add('current');
-        actueleHalte.innerText += ' (Huidig)';
-    }
-
+    
     verwerkHalteGebeurtenissen();
 
     // Verhoog index voor de volgende 20 seconden
     huidigeHalteIndex = (huidigeHalteIndex + 1) % totaalHaltes;
 }
 
-// Elke 20 seconden naar de volgende halte
-setInterval(updateBusLocatie, 20000);
 
 // start simulatie op laden
 window.onload = () => {
